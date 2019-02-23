@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {dependencies} = require('./package.json');
 const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -44,6 +45,9 @@ module.exports = {
           content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no'
         }
       ],
+      scripts: devMode ? [] : [
+        `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`
+      ],
       minify: {
         collapseWhitespace: true
       }
@@ -53,5 +57,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css?[hash:8]'
     })
-  ]
+  ],
+  devtool: devMode ? 'eval' : 'source-map',
+  externals: devMode ? {} : {
+    vue: 'Vue'
+  }
 };
