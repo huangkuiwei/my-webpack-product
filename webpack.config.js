@@ -21,7 +21,22 @@ module.exports = {
         test: /\.css$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader'
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('postcss-nested'),
+                require('autoprefixer'),
+                require('postcss-clean')
+              ]
+            }
+          }
         ]
       },
       {
@@ -31,6 +46,16 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets',
+            name: devMode ? '[name].[ext]' : '[name].[ext]?[hash:8]'
+          }
+        },
       }
     ]
   },
@@ -61,5 +86,9 @@ module.exports = {
   devtool: devMode ? 'eval' : 'source-map',
   externals: devMode ? {} : {
     vue: 'Vue'
+  },
+  devServer: {
+    host: 'localhost',
+    port: '9999'
   }
 };
