@@ -15,6 +15,12 @@ module.exports = {
   output: {
     filename: devMode ? '[name].js' : '[name].js?[chunkhash:8]'
   },
+  resolve: {
+    alias: {
+      '@src': path.resolve(__dirname, 'src'),
+      '@images': path.resolve(__dirname, 'assets/images')
+    }
+  },
   module: {
     rules: [
       {
