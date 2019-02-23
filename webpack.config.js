@@ -18,7 +18,8 @@ module.exports = {
   resolve: {
     alias: {
       '@src': path.resolve(__dirname, 'src'),
-      '@images': path.resolve(__dirname, 'assets/images')
+      '@images': path.resolve(__dirname, 'assets/images'),
+      '@components': path.resolve(__dirname, 'components')
     }
   },
   module: {
@@ -54,7 +55,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-syntax-dynamic-import']
           }
         }
       },
@@ -82,7 +84,8 @@ module.exports = {
         }
       ],
       scripts: devMode ? [] : [
-        `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`
+        `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
+        `https://cdn.bootcss.com/vue-router/${dependencies.vue.substr(1)}/vue-router.min.js`
       ],
       minify: {
         collapseWhitespace: true
@@ -96,7 +99,8 @@ module.exports = {
   ],
   devtool: devMode ? 'eval' : 'source-map',
   externals: devMode ? {} : {
-    vue: 'Vue'
+    'vue': 'Vue',
+    'vue-router': 'VueRouter'
   },
   devServer: {
     host: 'localhost',
