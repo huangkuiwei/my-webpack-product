@@ -20,20 +20,20 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,     //CSS剥离js插件
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1
+              importLoaders: 1                //默认：0  css-loader之前的loader数量
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: 'postcss-loader',         //postcss-loader
             options: {
               plugins: [
-                require('postcss-nested'),
-                require('autoprefixer'),
-                require('postcss-clean')
+                require('postcss-nested'),    //CSS嵌套写法支持
+                require('autoprefixer'),      //打包时自动添加浏览器前缀
+                require('postcss-clean')      //CSS压缩插件
               ]
             }
           }
