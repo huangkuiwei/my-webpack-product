@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const {VueLoaderPlugin} = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {dependencies} = require('./package.json');
+const Webpack = require('webpack');
 const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -106,6 +107,9 @@ module.exports = {
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css?[hash:8]'
+    }),
+    new Webpack.DefinePlugin({
+      'WEBPACK_MODE': JSON.stringify(devMode ? 'development' : 'production')
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',
