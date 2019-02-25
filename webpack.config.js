@@ -110,6 +110,10 @@ module.exports = {
     }),
     new Webpack.DefinePlugin({
       'WEBPACK_MODE': JSON.stringify(devMode ? 'development' : 'production')
+    }),
+    new Webpack.ProvidePlugin({
+      // 如果你遇到了至少一处用到 lodash 变量的模块实例，那请你将 lodash package 包引入进来，并将其提供给需要用到它的模块。
+      _: 'lodash'
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',

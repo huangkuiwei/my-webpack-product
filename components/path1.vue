@@ -6,7 +6,13 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    created() {
+      let a;
+      a = _.join(['Hello', 'World'], ' ');
+      console.log(a)
+    }
+  }
 </script>
 
 <style scoped>
