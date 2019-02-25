@@ -19,6 +19,7 @@ module.exports = {
     alias: {
       '@src': path.resolve(__dirname, 'src'),
       '@images': path.resolve(__dirname, 'assets/images'),
+      '@fonts': path.resolve(__dirname, 'assets/fonts'),
       '@components': path.resolve(__dirname, 'components')
     }
   },
@@ -61,11 +62,21 @@ module.exports = {
         }
       },
       {
-        test: /\.(jpg|png|gif)$/,
+        test: /\.(jpg|png|gif|svg)$/,
         use: {
           loader: 'file-loader',
           options: {
-            outputPath: 'assets',
+            outputPath: 'assets/images',
+            name: devMode ? '[name].[ext]' : '[name].[ext]?[hash:8]'
+          }
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/fonts',
             name: devMode ? '[name].[ext]' : '[name].[ext]?[hash:8]'
           }
         },
