@@ -14,7 +14,7 @@ module.exports = {
     app: path.resolve(__dirname, 'src/main.js')
   },
   output: {
-    filename: devMode ? '[name].js' : '[name].js?[chunkhash:8]'
+    filename: devMode ? '[name].js' : '[name].[chunkhash:8].js'
   },
   resolve: {
     alias: {
@@ -68,7 +68,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             outputPath: 'assets/images',
-            name: devMode ? '[name].[ext]' : '[name].[ext]?[hash:8]'
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'
           }
         },
       },
@@ -78,7 +78,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             outputPath: 'assets/fonts',
-            name: devMode ? '[name].[ext]' : '[name].[ext]?[hash:8]'
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'
           }
         },
       }
@@ -106,7 +106,7 @@ module.exports = {
     new CleanWebpackPlugin('dist'),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css?[hash:8]'
+      filename: '[name].[hash:8].css'
     }),
     new Webpack.DefinePlugin({
       'WEBPACK_MODE': JSON.stringify(devMode ? 'development' : 'production')
