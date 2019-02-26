@@ -9,7 +9,7 @@
   export default {
     created() {
       let a;
-      a = _.join(['Hello', 'World'], ' ');
+      a = _join(['Hello', 'World'], ' ');
       console.log(a)
     },
     mounted() {
