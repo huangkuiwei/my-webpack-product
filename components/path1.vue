@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>path1</p>
+    <p id="path1">path1</p>
     <img src="@images/01.jpg">
   </div>
 </template>
@@ -11,6 +11,9 @@
       let a;
       a = _.join(['Hello', 'World'], ' ');
       console.log(a)
+    },
+    mounted() {
+      $('#path1').css('color', 'red')
     }
   }
 </script>

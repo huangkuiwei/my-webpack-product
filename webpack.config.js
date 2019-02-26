@@ -95,9 +95,12 @@ module.exports = {
           content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no'
         }
       ],
-      scripts: devMode ? [] : [
+      scripts: devMode ? [
+        'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
+      ] : [
         `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
-        `https://cdn.bootcss.com/vue-router/${dependencies.vue.substr(1)}/vue-router.min.js`
+        `https://cdn.bootcss.com/vue-router/${dependencies.vue.substr(1)}/vue-router.min.js`,
+        'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
       ],
       minify: {
         collapseWhitespace: true
