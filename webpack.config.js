@@ -10,11 +10,10 @@ const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: {
-    // 默认 main: path.resolve(__dirname, 'src/index.js')
-    app: path.resolve(__dirname, 'src/main.js')
+    app: path.resolve(__dirname, 'src/main.js')     // 入口
   },
   output: {
-    filename: devMode ? '[name].js' : '[name].[chunkhash:8].js'
+    filename: devMode ? '[name].js' : '[name].[chunkhash:8].js'     //出口 打包的文件名
   },
   resolve: {
     alias: {
@@ -57,13 +56,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-syntax-dynamic-import']
+            presets: ['@babel/preset-env'],                       //js语法编译
+            plugins: ['@babel/plugin-syntax-dynamic-import']      //import()语法支持
           }
         }
       },
       {
-        test: /\.(jpg|png|gif|svg)$/,
+        test: /\.(jpg|png|gif|svg)$/,       //图片文件
         use: {
           loader: 'file-loader',
           options: {
@@ -73,7 +72,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf)$/,      //字体文件
         use: {
           loader: 'file-loader',
           options: {
@@ -96,6 +95,7 @@ module.exports = {
         }
       ],
       scripts: devMode ? [
+        // 测试jQuery 1.X版本会报错
         'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
       ] : [
         `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
@@ -103,21 +103,21 @@ module.exports = {
         'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
       ],
       minify: {
-        collapseWhitespace: true
+        collapseWhitespace: true      //压缩html代码，去掉空格
       }
     }),
     new CleanWebpackPlugin('dist'),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash:8].css'
+      filename: '[name].[hash:8].css'     //CSS代码分离压缩
     }),
     new Webpack.DefinePlugin({
-      'WEBPACK_MODE': JSON.stringify(devMode ? 'development' : 'production')
+      'WEBPACK_MODE': JSON.stringify(devMode ? 'development' : 'production')    //定义全局变量
     }),
     new Webpack.ProvidePlugin({
       // 如果你遇到了至少一处用到 lodash 变量的模块实例，那请你将 lodash package 包引入进来，并将其提供给需要用到它的模块。
       // _: 'lodash'
-      _join: 'lodash/join'      //值：路径
+      _join: 'lodash/join'      //值：路径（只打包特定的模块）
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',
