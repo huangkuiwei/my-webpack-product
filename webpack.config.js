@@ -100,6 +100,7 @@ module.exports = {
       ] : [
         `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
         `https://cdn.bootcss.com/vue-router/${dependencies['vue-router'].substr(1)}/vue-router.min.js`,
+        `https://cdn.bootcss.com/element-ui/${dependencies['element-ui'].substr(1)}/index.js`,
         'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
       ],
       minify: {
@@ -124,7 +125,8 @@ module.exports = {
   // 想引用一个库，但是又不想让webpack打包，并且又不影响我们在程序中以CMD、AMD或者window/global全局等方式进行使用
   externals: devMode ? {} : {
     'vue': 'Vue',
-    'vue-router': 'VueRouter'
+    'vue-router': 'VueRouter',
+    'element-ui': 'ELEMENT'
   },
   devServer: {
     host: 'localhost',
