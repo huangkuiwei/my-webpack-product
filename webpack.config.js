@@ -96,7 +96,7 @@ module.exports = {
       ],
       scripts: devMode ? [
         // 测试jQuery 1.X版本会报错
-        'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
+        // 'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
       ] : [
         `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
         `https://cdn.bootcss.com/vue-router/${dependencies['vue-router'].substr(1)}/vue-router.min.js`,
@@ -118,7 +118,10 @@ module.exports = {
     new Webpack.ProvidePlugin({
       // 如果你遇到了至少一处用到 lodash 变量的模块实例，那请你将 lodash package 包引入进来，并将其提供给需要用到它的模块。
       // _: 'lodash'
-      _join: 'lodash/join'      //值：路径（只打包特定的模块）
+      _join: 'lodash/join',      //值：路径（只打包特定的模块）
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',
@@ -126,7 +129,8 @@ module.exports = {
   externals: devMode ? {} : {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
-    'element-ui': 'ELEMENT'
+    'element-ui': 'ELEMENT',
+    'jquery': '$'
   },
   devServer: {
     host: 'localhost',
