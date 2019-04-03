@@ -121,6 +121,7 @@ module.exports = {
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',
+  // 想引用一个库，但是又不想让webpack打包，并且又不影响我们在程序中以CMD、AMD或者window/global全局等方式进行使用
   externals: devMode ? {} : {
     'vue': 'Vue',
     'vue-router': 'VueRouter'
