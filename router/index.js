@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -9,7 +10,7 @@ const routes = [
   },
   {
     path: '/path1',
-    component: () => import(/* webpackChunkName: 'path1' */ '@components/path1.vue')
+    component: () => import(/* webpackChunkName: 'path1' */ '@components/path1.vue')  //路由懒加载
   },
   {
     path: '/path2',

@@ -9,23 +9,14 @@
 <script>
   export default {
     created() {
-      let a;
-      a = _join(['Hello', 'World'], ' ');
-      console.log(a);
-    },
-    mounted() {
-      $('#path1').css('color', 'red')
+      console.log(_join(['Hello', 'World'], ' '))
     },
     methods: {
       getMessage() {
-        this.$http.get('https://api.apiopen.top/likePoetry?name=%E6%9D%8E%E7%99%BD', {lock: true}).then(data => {
+        this.$http.get('https://api.apiopen.top/likePoetry?name=李白', {lock: true}).then(data => {
           console.log(data)
         })
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

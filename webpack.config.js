@@ -94,14 +94,10 @@ module.exports = {
           content: 'width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no'
         }
       ],
-      scripts: devMode ? [
-        // 测试jQuery 1.X版本会报错
-        // 'https://cdn.bootcss.com/jquery/3.3.1/jquery.js'
-      ] : [
+      scripts: devMode ? [] : [
         `https://cdn.bootcss.com/vue/${dependencies.vue.substr(1)}/vue.min.js`,
         `https://cdn.bootcss.com/vue-router/${dependencies['vue-router'].substr(1)}/vue-router.min.js`,
-        `https://cdn.bootcss.com/element-ui/${dependencies['element-ui'].substr(1)}/index.js`,
-        'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
+        `https://cdn.bootcss.com/element-ui/${dependencies['element-ui'].substr(1)}/index.js`
       ],
       minify: {
         collapseWhitespace: true      //压缩html代码，去掉空格
@@ -118,10 +114,7 @@ module.exports = {
     new Webpack.ProvidePlugin({
       // 如果你遇到了至少一处用到 lodash 变量的模块实例，那请你将 lodash package 包引入进来，并将其提供给需要用到它的模块。
       // _: 'lodash'
-      _join: 'lodash/join',      //值：路径（只打包特定的模块）
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      _join: 'lodash/join'      //值：路径（只打包特定的模块）
     })
   ],
   devtool: devMode ? 'eval' : 'source-map',
@@ -129,11 +122,17 @@ module.exports = {
   externals: devMode ? {} : {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
-    'element-ui': 'ELEMENT',
-    'jquery': '$'
+    'element-ui': 'ELEMENT'
   },
   devServer: {
-    host: 'localhost',
-    port: '9999'
+    disableHostCheck: true,
+    host: '0.0.0.0',
+    port: 88,
+    proxy: {
+      '/api': {
+        target: process.env.DEV_SERVER || 'http://localhost:8080',
+        pathRewrite: {'^/api': ''}
+      }
+    }
   }
 };
