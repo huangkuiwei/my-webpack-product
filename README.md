@@ -1,2 +1,1 @@
-# webpack-demo
-webpack-demo
+my-webpack-product
