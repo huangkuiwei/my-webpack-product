@@ -1,1 +1,1 @@
-my-webpack-product
+my-webpack-project
