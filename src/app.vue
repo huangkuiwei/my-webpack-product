@@ -4,3 +4,16 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+  export default {
+    created() {
+
+    },
+    methods: {
+      async sleep() {
+
+      }
+    }
+  }
+</script>

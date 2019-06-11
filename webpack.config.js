@@ -13,15 +13,17 @@ module.exports = {
     app: path.resolve(__dirname, 'src/main.js')     // 入口
   },
   output: {
-    filename: devMode ? '[name].js' : '[name].[chunkhash:8].js'     //出口 打包的文件名
+    path: path.resolve(__dirname, 'dist'),                       // 输出的目录（默认）
+    filename: devMode ? '[name].js' : '[name].[chunkhash:8].js'  // 输出打包的文件名  [name]指代 entry 对象写法的属性名
   },
   resolve: {
-    alias: {
+    alias: {      // 路径别名
       '@src': path.resolve(__dirname, 'src'),
       '@images': path.resolve(__dirname, 'assets/images'),
       '@fonts': path.resolve(__dirname, 'assets/fonts'),
       '@components': path.resolve(__dirname, 'components')
-    }
+    },
+    extensions: ['.js', '.vue', '.json']        // 引入文件的后缀，会自动搜索
   },
   module: {
     rules: [
@@ -56,8 +58,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],                       //js语法编译
-            plugins: ['@babel/plugin-syntax-dynamic-import']      //import()语法支持
+            presets: ['@babel/preset-env'],                       // js语法编译
+            plugins: ['@babel/plugin-syntax-dynamic-import']      // import()语法支持
           }
         }
       },
@@ -66,8 +68,8 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            outputPath: 'assets/images',
-            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'
+            outputPath: 'assets/images',        // 文件输出的路径（相对于 dist 目录）
+            name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'    // 输出文件的文件名
           }
         },
       },
@@ -127,7 +129,7 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
     host: '0.0.0.0',
-    port: 88,
+    port: process.env.PORT || 80,
     proxy: {
       '/api': {
         target: process.env.DEV_SERVER || 'http://localhost:8080',
