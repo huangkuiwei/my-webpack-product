@@ -21,7 +21,8 @@ module.exports = {
       '@src': path.resolve(__dirname, 'src'),
       '@images': path.resolve(__dirname, 'assets/images'),
       '@fonts': path.resolve(__dirname, 'assets/fonts'),
-      '@components': path.resolve(__dirname, 'components')
+      '@components': path.resolve(__dirname, 'components'),
+      '@views': path.resolve(__dirname, 'views')
     },
     extensions: ['.js', '.vue', '.json']        // 引入文件的后缀，会自动搜索
   },

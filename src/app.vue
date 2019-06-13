@@ -6,14 +6,5 @@
 </template>
 
 <script>
-  export default {
-    created() {
-
-    },
-    methods: {
-      async sleep() {
-
-      }
-    }
-  }
+  export default {}
 </script>
