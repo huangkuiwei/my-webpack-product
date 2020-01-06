@@ -1,11 +1,11 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const {VueLoaderPlugin} = require('vue-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const {dependencies} = require('./package.json');
-const Webpack = require('webpack');
-const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { dependencies } = require('./package.json')
+const Webpack = require('webpack')
+const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
@@ -19,10 +19,10 @@ module.exports = {
   resolve: {
     alias: {      // 路径别名
       '@src': path.resolve(__dirname, 'src'),
-      '@images': path.resolve(__dirname, 'assets/images'),
-      '@fonts': path.resolve(__dirname, 'assets/fonts'),
-      '@components': path.resolve(__dirname, 'components'),
-      '@views': path.resolve(__dirname, 'views')
+      '@images': path.resolve(__dirname, 'src/assets/images'),
+      '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@views': path.resolve(__dirname, 'src/views')
     },
     extensions: ['.js', '.vue', '.json']        // 引入文件的后缀，会自动搜索
   },
@@ -72,7 +72,7 @@ module.exports = {
             outputPath: 'assets/images',        // 文件输出的路径（相对于 dist 目录）
             name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'    // 输出文件的文件名
           }
-        },
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,      //字体文件
@@ -82,7 +82,7 @@ module.exports = {
             outputPath: 'assets/fonts',
             name: devMode ? '[name].[ext]' : '[name].[hash:8].[ext]'
           }
-        },
+        }
       }
     ]
   },
@@ -134,8 +134,8 @@ module.exports = {
     proxy: {
       '/api': {
         target: process.env.DEV_SERVER || 'http://localhost:8080',
-        pathRewrite: {'^/api': ''}
+        pathRewrite: { '^/api': '' }
       }
     }
   }
-};
+}

@@ -1,11 +1,11 @@
 import axios from 'axios'
-import {Loading} from 'element-ui'
+import { Loading } from 'element-ui'
 
-let loading;
-
+let loading
 let $http = axios.create({
-  timeout: 20000
-});
+  timeout: 15000,
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/'
+})
 
 $http.interceptors.request.use(config => {
   if (config.lock) {
@@ -16,16 +16,20 @@ $http.interceptors.request.use(config => {
     })
   }
   return config
-});
+})
 
 $http.interceptors.response.use(response => {
   if (response.config.lock) {
     loading.close()
   }
-});
+}, error => {
+  if (error.config.lock) {
+    loading.close()
+  }
+})
 
 export default {
-  install(Vue) {
+  install (Vue) {
     Vue.prototype.$http = $http
   }
 }

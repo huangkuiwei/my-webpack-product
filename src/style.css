@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'myFont';
-  src: url('../assets/fonts/my-font.ttf');
+  font-family: "myFont";
+  src: url("./assets/fonts/my-font.ttf");
   font-weight: 600;
   font-style: normal;
 }
 html {
   background: #f78709;
-  font-family: 'myFont';
+  font-family: myFont, "Microsoft Yahei", Serif;
 }
