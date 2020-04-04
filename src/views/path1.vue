@@ -7,14 +7,14 @@
 </template>
 
 <script>
-  export default {
-    created () {
-      // console.log(_join(['Hello', 'World'], ' '))
-    },
-    methods: {
-      getMessage () {
-        // 操作
-      }
+export default {
+  created () {
+    // console.log(_join(['Hello', 'World'], ' '))
+  },
+  methods: {
+    getMessage () {
+      // 操作
     }
   }
+}
 </script>
